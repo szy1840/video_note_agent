@@ -58,9 +58,9 @@ class SubtitleGenerator:
             options = {
                 "language": "zh",  # 使用中文
                 "task": "transcribe",
-                "word_timestamps": True,  # 获取词级时间戳
+                "word_timestamps": False,  # 获取词级时间戳
                 "verbose": False,
-                "initial_prompt": "以下是普通话的句子。"  # 确保生成简体中文
+                "initial_prompt": "以下是普通话的句子。使用简体中文。"  # 确保生成简体中文
             }
             
             # 执行转录

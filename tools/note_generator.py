@@ -119,7 +119,7 @@ class NoteGenerator:
         # print(processed_content['full_text'])
         
         prompt = f"""
-你是一位专业的历史学者和教育专家。请基于以下历史视频的转文字字幕内容，帮助学生生成一份高质量的Markdown格式学习笔记。
+你是一位专业的历史学者和教育专家。请基于以下历史视频的转文字字幕内容，帮助学生生成一份通俗易懂、高质量的Markdown格式学习笔记。
 
 视频标题：{title}
 
@@ -137,6 +137,7 @@ class NoteGenerator:
 3. 在首次出现时为西方人名地名使用括号标注英文，例如：马略(Marius)、高卢人(Gauls)
 4. 对重要概念和关键词进行**加粗**处理，例如：**马略改革**、**元老院**
 5. 对于历史名词请根据上下文和历史知识使用最准确的中文表达
+6. **语言通俗化**：使用通俗易懂的语言，避免过于学术化、晦涩难懂的词汇和表达
 
 ## 内容要求
 1. **地图优先**：在讲述具体历史事件之前，先提供相关地图搜索建议，帮助读者建立地理概念
@@ -171,7 +172,7 @@ class NoteGenerator:
 - 注重补充字幕中缺失的重要历史背景和逻辑关系
 - 保持内容的连贯性和逻辑性
 
-请生成一份结构清晰、内容丰富、适合学习的Markdown笔记。
+请生成一份结构清晰、内容丰富、适合学习的Markdown笔记。特别注意，避免学术论文式的表达，尽量避免使用类似"绩效合法性"、"双引擎补位"、"立法场域"等这种难懂的、学术化的或者由引号括起来的自己创造的新词汇
 """
         
         return prompt
@@ -185,7 +186,7 @@ class NoteGenerator:
             response = client.chat.completions.create(
                 model=AI_CONFIG["default_model"],
                 messages=[
-                    {"role": "system", "content": "你是一位专业的历史学者和教育专家，擅长将历史视频的字幕内容转化为高质量的学习笔记。"},
+                    {"role": "system", "content": "你是一位专业的历史学者和教育专家，擅长将历史视频的字幕内容转化为通俗易懂、高质量的学习笔记。请使用简单明了的语言，避免过于学术化的、晦涩难懂的和自己编造的词汇。"},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=GPT_CONFIG["temperature"]
